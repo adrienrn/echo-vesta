@@ -1,13 +1,19 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ExtractTextPlugin = require('mini-css-extract-plugin');
+var path = require('path');
 var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   context: __dirname,
-  entry: './src/index.jsx',
+  devServer: {
+    contentBase: 'public',
+    historyApiFallback: true,
+  },
+  entry: './src/index.js',
   output: {
-    path: __dirname + '/public',
     filename: 'bundle.js',
-    publicPath: '/public/',
+    path: path.resolve(__dirname, 'public'),
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -16,12 +22,16 @@ module.exports = {
         exclude: /(node_modules)/,
         loader: 'babel-loader',
         query: {
-          presets: ['react', 'es2015'],
+          presets: ['env', 'react', 'es2015'],
         },
       },
       {
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('css-loader!sass-loader'),
+        test: /\.scss|\.css$/,
+        use: [
+          ExtractTextPlugin.loader,
+          'css-loader',
+          'sass-loader',
+        ],
       },
       {
         test: /\.svg$/,
@@ -30,9 +40,22 @@ module.exports = {
     ],
   },
   plugins: [
-    new ExtractTextPlugin({ filename: 'app.css', allChunks: true })
+    // webpack.
+    new ExtractTextPlugin({
+      chunkFilename: "[id].css",
+      filename: "[name].css",
+    }),
+    new HtmlWebpackPlugin({
+      template: 'public/index.html',
+      filename: 'index.html',
+      inject: 'body',
+    }),
   ],
   resolve: {
+    modules: [
+      path.resolve('./src'),
+      path.resolve('./node_modules'),
+    ],
     extensions: ['.js', '.jsx'],
   },
   watchOptions: {

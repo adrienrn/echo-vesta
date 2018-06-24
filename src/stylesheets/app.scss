@@ -1,0 +1,87 @@
+@import 'settings/base.scss';
+@import url('https://fonts.googleapis.com/css?family=Space+Mono:400,700');
+
+@mixin clearfix() {
+  clear: both;
+}
+
+html, body {
+  background-color: $body-bg;
+  height: 100%;
+}
+
+.layout {
+  background-color: $body-bg;
+  color: $text-color;
+  font-family: 'Space Mono', monospace;
+  height: 100%;
+}
+
+.layout-wrapper {
+  padding: 50px;
+  padding-bottom: 100px;
+}
+
+.offie-backdrop {
+  background-color: rgba($body-bg, 1);
+  bottom: 0;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+
+  z-index: 0;
+}
+
+.offie-layer {
+  background-color: $brand-primary;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 1;
+}
+
+.navbar {
+  .navbar-header {
+    text-transform: uppercase;
+  }
+}
+
+.nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav--system-dock {
+  .nav-item {
+    float: left;
+
+    .nav-link {
+      display: block;
+      height: 50px;
+      width: 150px;
+    }
+  }
+}
+
+.layout-footer {
+  bottom: 0;
+  height: 50px;
+  left: 0;
+  position: fixed;
+  width: 100%;
+
+  .nav--system-dock {
+
+  }
+}
+
+.layout-header {
+  @include clearfix();
+
+  .nav--system-status {
+    float: right;
+  }
+}
