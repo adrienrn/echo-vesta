@@ -1,0 +1,56 @@
+@mixin line-corners($line-color: $brand-primary, $line-size: 7, $line-type: in, $line-distance: 0) {
+  position: absolute;
+  left: 0;
+  width: 100%;
+
+  &:before,
+  &:after {
+    border-color: $line-color;
+    border-style: solid;
+    content: '';
+    height: $line-size + px;
+    position: absolute;
+    width: $line-size + px;
+  }
+
+  // top corners
+  &.top {
+    &:before {
+      border-width: 1px 0 0 1px;
+    }
+
+    &:after {
+      border-width: 1px 1px 0 0;
+    }
+  }
+
+  // bottom corners
+  &.bottom {
+    &:before {
+      border-width: 0 0 1px 1px;
+    }
+
+    &:after {
+      border-width: 0 1px 1px 0;
+    }
+  }
+
+  @if $line-type == in {
+    &:before {
+      left: $line-distance + px;
+    }
+
+    &:after {
+      right: $line-distance + px;
+    }
+
+    &.top {
+      top: $line-distance + px;
+    }
+
+    &.bottom {
+      bottom: ($line-distance + $line-size) + px;
+    }
+
+  }
+}

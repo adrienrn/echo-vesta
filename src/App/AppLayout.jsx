@@ -29,7 +29,9 @@ class AppLayout extends React.Component {
           <div>
             <AppHeader />
 
-            {this.props.children}
+            <div className="layout-main">
+              {this.props.children}
+            </div>
 
             <AppFooter />
           </div>

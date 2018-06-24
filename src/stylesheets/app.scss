@@ -1,9 +1,30 @@
+
+@import 'tools/decorators.scss';
 @import 'settings/base.scss';
+
 @import url('https://fonts.googleapis.com/css?family=Space+Mono:400,700');
 
 @mixin clearfix() {
-  clear: both;
+  &::before,
+  &::after {
+    content: ' ';
+    display: table;
+  }
+
+  &::after {
+    clear: both;
+  }
 }
+
+* {
+  @include clearfix();
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+
 
 html, body {
   background-color: $body-bg;
@@ -33,13 +54,24 @@ html, body {
   z-index: 0;
 }
 
-.offie-layer {
-  background-color: $brand-primary;
+.offie-modal {
+
   position: fixed;
   left: 50%;
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
   z-index: 1;
+}
+
+.offie-modal--loader {
+  background: url('../resources/loader.svg');
+  background-size: 5px 5px;
+  height: 50px;
+  width: 250px;
+}
+
+.offie-modal--user-login,
+.offie-modal--system-intrusion {
 }
 
 .navbar {
@@ -55,21 +87,56 @@ html, body {
 }
 
 .nav--system-dock {
+  margin-left: -5px;
+  margin-right: -5px;
+
   .nav-item {
     float: left;
+    padding: 0 5px;
 
     .nav-link {
+      background: $body-bg url('../resources/pattern-dot.svg');
+      background-size: 5px 5px;
       display: block;
-      height: 50px;
-      width: 150px;
+      height: 120px;
+      width: 120px;
     }
+  }
+}
+
+.layout-header {
+  @include clearfix();
+  border-bottom: 1px solid rgba($brand-primary, 0.6);
+  margin-bottom: 10px;
+
+  .nav--system-status {
+    float: right;
+  }
+}
+
+.layout-main {
+  margin-left: -5px;
+  margin-right: -5px;
+
+  .layout-panel {
+    float: left;
+    padding: 0 5px;
+  }
+
+  .layout-panel--aside-left {
+    width: 33.333333%;
+  }
+
+  .layout-panel--content-main {
+    width: 66.666666%;
   }
 }
 
 .layout-footer {
   bottom: 0;
-  height: 50px;
   left: 0;
+  padding: 50px;
+  padding-top: 0px;
   position: fixed;
   width: 100%;
 
@@ -78,10 +145,30 @@ html, body {
   }
 }
 
-.layout-header {
-  @include clearfix();
-
-  .nav--system-status {
-    float: right;
-  }
+.section-header {
+  border-bottom: 1px solid rgba($brand-primary, 0.4);
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  position: relative;
 }
+
+.section-body {
+  background: url('../resources/locked.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 95% 90%, auto;
+  border: 1px solid rgba($brand-primary, 0.4);
+  min-height: 150px;
+  padding: 10px;
+  position: relative;
+}
+
+.section-title {
+  margin: 0;
+}
+
+.section-decorator--bottom,
+.section-decorator--top {
+  @include line-corners();
+}
+

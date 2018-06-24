@@ -1,21 +1,28 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 import {withContext} from 'App/AppContextProvider';
+import SectionPanel from 'App/Components/SectionPanel';
 
-class Main extends Component {
+class Main extends React.Component {
   componentDidMount() {
     this.props.context.showModal('SYSTEM_LOADER')
 
     this.timerHandle = setTimeout(
       () => this.props.context.hideModal('SYSTEM_LOADER'),
-      5000
+      400
     );
   }
 
   render() {
     return (
       <div>
-        Main
+        <div className='layout-panel layout-panel--aside-left'>
+          <SectionPanel title="Aside" />
+        </div>
+
+        <div className='layout-panel layout-panel--content-main'>
+          <SectionPanel title="Oyo" />
+        </div>
       </div>
     );
   }

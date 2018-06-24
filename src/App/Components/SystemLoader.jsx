@@ -11,8 +11,7 @@ class SystemLoader extends React.Component {
     return (
       <div>
         <AppBackdrop />
-        <div className="offie-layer">
-          LOADER
+        <div className="offie-modal offie-modal--loader">
         </div>
       </div>
     );
