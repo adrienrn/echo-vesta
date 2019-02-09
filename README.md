@@ -16,5 +16,3 @@ System is up and running.
 Vesta System v0.1.8998.19.02.1 is ready.
 
 ---
-
-
