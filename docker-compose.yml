@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   app:
-    build: '.'
+    build: './app'
     command: >
       bash -c 'yarn run start'
     environment:
@@ -11,5 +11,5 @@ services:
       - '80:3000'
       - '35729:35729'
     volumes:
-      - '.:/app:rw'
+      - './app:/app:rw'
       - '/app/node_modules'
